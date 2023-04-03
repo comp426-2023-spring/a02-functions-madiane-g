@@ -38,7 +38,7 @@ for (var i=2; i<process.argv.length; i+=2) {
         console.error("Error: Cannot specify n LATITUDE twice.")
         process.exit(1)
       } else {
-        options.latitude = Number(value)
+        options.latitude = Number(value).toFixed(2)
       }
       break;
     case '-s':
@@ -47,7 +47,7 @@ for (var i=2; i<process.argv.length; i+=2) {
         console.error("Error: Cannot specify s LATITUDE twice.")
         process.exit(1)
       } else {
-        options.latitude = Number(value)
+        options.latitude = Number(value).toFixed(2)
       }
       break;
     case '-e':
@@ -56,7 +56,7 @@ for (var i=2; i<process.argv.length; i+=2) {
         console.error("Error: Cannot specify LONGITUDE twice.")
         process.exit(1)
       } else {
-        options.longitude = Number(value)
+        options.longitude = Number(value).toFixed(2)
       }
       break;
     case '-w':
@@ -65,7 +65,7 @@ for (var i=2; i<process.argv.length; i+=2) {
         console.error("Error: Cannot specify LONGITUDE twice.")
         process.exit(1)
       } else {
-        options.longitude = Number(value)
+        options.longitude = Number(value).toFixed(2)
       }
       break;
     case '-z':
@@ -97,9 +97,9 @@ async function main() {
     date = "tomorrow."
   }
   if (precip > 0) {
-    console.log(`You may want to break out those galoshes ${date}`)
+    console.log(`You might need your galoshes ${date}`)
   } else {
-    console.log(`You most likely won't be reaching for your galoshes ${date}`)
+    console.log(`You will not need your galoshes ${date}`)
   }
 }
 

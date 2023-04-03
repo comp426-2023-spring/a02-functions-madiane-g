@@ -20,6 +20,7 @@ let OPT_E=false
 let OPT_W=false
 //Set verbose var default
 let VERBOSE=false
+let JSON_ONLY=false
 
 const options = {};
 const argv = require('minimist')(process.argv.slice(2))
@@ -75,11 +76,10 @@ for (var i=2; i<process.argv.length; i+=2) {
       options.day = Number(value)
       break;
     case '-v':
-      VERBOSE= boolean(value)
+      VERBOSE=true
       break;
     case '-j':
-      console.log()
-      process.exit(0)
+      JSON_ONLY=true
       break;
   }
 }

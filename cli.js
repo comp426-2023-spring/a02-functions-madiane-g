@@ -85,9 +85,16 @@ for (var i=2; i<process.argv.length; i+=2) {
 }
 
 async function main() {
-  const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${options.latitude}&longitude=${options.longitude}&daily=precipitation_hours&timezone=${options.timezone}`)
+  const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${options.latitude}&longitude=${options.longitude}&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,precipitation_hours,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=${options.timezone}`)
   const data = await response.json()
   const precip = data.daily.precipitation_hours[options.day]
+  const current_time = data.current_weather.time
+  const current_temp = data.current_weather.temperature
+  const wind_speed = data.current_weather.windspeed
+  const wind_dir = data.current_weather.winddirection
+  const weathercode = data.current_weather.weathercode
+  const time = data.daily.time[options.day]
+
   var date = ""
   if (options.day == 0) {
     date = "today."
@@ -104,3 +111,24 @@ async function main() {
 }
 
 main()
+
+
+// TIME=$(jq -r -c ".daily.time[${DAY}]" <<< ${DATA})
+// SUNSET=$(jq -r -c ".daily.sunset[${DAY}]" <<< ${DATA})
+// SUNRISE=$(jq -r -c ".daily.sunrise[${DAY}]" <<< ${DATA})
+// PRECIP_HOURS=$(jq -r -c ".daily.precipitation_hours[${DAY}]" <<< ${DATA})
+// PRECIP_SUM=$(jq -r -c ".daily.precipitation_sum[${DAY}]" <<< ${DATA})
+// WIND_GUSTS=$(jq -r -c ".daily.windgusts_10m_max[${DAY}]" <<< ${DATA})
+// WIND_DIRECTION=$(jq -r -c ".daily.winddirection_10m_dominant[${DAY}]" <<< ${DATA})
+// WIND_SPEED=$(jq -r -c ".daily.windspeed_10m_max[${DAY}]" <<< ${DATA})
+// TEMP_LOW=$(jq -r -c ".daily.temperature_2m_min[${DAY}]" <<< ${DATA})
+// WEATHERCODE=$(jq -r -c ".daily.weathercode[${DAY}]" <<< ${DATA})
+// TEMP_HIGH=$(jq -r -c ".daily.temperature_2m_max[${DAY}]" <<< ${DATA})
+// PRECIP_HOURS_UNIT=$(jq -r -c ".daily_units.precipitation_hours" <<< ${DATA})
+// PRECIP_SUM_UNIT=$(jq -r -c ".daily_units.precipitation_sum" <<< ${DATA})
+// WIND_GUSTS_UNIT=$(jq -r -c ".daily_units.windgusts_10m_max" <<< ${DATA})
+// WIND_DIRECTION_UNIT=$(jq -r -c ".daily_units.winddirection_10m_dominant" <<< ${DATA})
+// WIND_SPEED_UNIT=$(jq -r -c ".daily_units.windspeed_10m_max" <<< ${DATA})
+// TEMP_LOW_UNIT=$(jq -r -c ".daily_units.temperature_2m_min" <<< ${DATA})
+// TEMP_HIGH_UNIT=$(jq -r -c ".daily_units.temperature_2m_max" <<< ${DATA})
+// WEATHERCODE_UNIT=$(jq -r -c ".daily_units.weathercode" <<< ${DATA})

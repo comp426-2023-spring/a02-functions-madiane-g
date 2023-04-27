@@ -75,6 +75,12 @@ for (var i=2; i<process.argv.length; i+=2) {
 async function main() {
   let response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${options.latitude}&longitude=${options.longitude}&daily=weathercode,temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,precipitation_hours,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph&precipitation_unit=inch&timezone=${timezone}`)
   let data = await response.json()
+  
+  if (JSON_ONLY) {
+    console.log(data)
+    process.exit(0)
+  }
+  
   let precip = data.daily.precipitation_hours[options.day]
   let current_time = data.current_weather.time
   let current_temp = data.current_weather.temperature
@@ -100,11 +106,6 @@ async function main() {
   let temp_high_unit = data.daily_units.temperature_2m_max
   let weathercode_unit = data.daily_units.weathercode
   var date = ""
-
-  if (JSON_ONLY) {
-    console.log(data)
-    process.exit(0)
-  }
   
   if (options.day == 0) {
     date = "today."

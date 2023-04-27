@@ -77,14 +77,8 @@ async function main() {
   let data = await response.json()
   
   if (JSON_ONLY) {
-    if (!options.latitude || !options.longitude) {
-      console.log("Latitude must be in range\nLongitude must be in range")
-      process.exit(1)
-    }
-    else {
-      console.log(data)
-      process.exit(0)
-    }
+    console.log(data)
+    process.exit(0)
   }
   
   let precip = data.daily.precipitation_hours[options.day]

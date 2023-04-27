@@ -79,7 +79,7 @@ async function main() {
   if (JSON_ONLY) {
     if (!options.longitude || options.latitude) {
       console.log("Latitude must be in range")
-      process.exit(1)
+      process.exit(0)
     }
     console.log(data)
     process.exit(0)

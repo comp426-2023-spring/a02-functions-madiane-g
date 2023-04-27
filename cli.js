@@ -140,7 +140,7 @@ async function main() {
 main()
 
 function show_help() {
-  console.log("\nUsage: $0 [options] -[n|s] LATITUDE -[e|w] LONGITUDE -z TIME_ZONE")
+  console.log("\nUsage: galosh.js [options] -[n|s] LATITUDE -[e|w] LONGITUDE -z TIME_ZONE")
   console.log("  -h\t\tShow this help message and exit.")
   console.log("  -n, -s\tLatitude: N positive; S negative.")
   console.log("  -e, -w\tLongitude: E positive; W negative.")
